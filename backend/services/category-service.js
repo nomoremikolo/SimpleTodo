@@ -11,7 +11,8 @@ exports.createCategory = async ({ title, user }) => {
 
   return newCategory;
 };
-exports.removeCategory = async ({ id, user }) => {
+
+exports.deleteCategory = async ({ id, user }) => {
   const existingCategory = await Category.findOne({ user: user.id, _id: id });
   if (!existingCategory) throw ApiError.BadRequest("Category not exist");
 
@@ -21,6 +22,6 @@ exports.removeCategory = async ({ id, user }) => {
 };
 
 exports.getCategories = async ({ user }) => {
-  const categories = await Category.find({ id: user.id });
+  const categories = await Category.find({ user: user.id });
   return categories;
 };

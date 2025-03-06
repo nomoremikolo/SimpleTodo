@@ -3,7 +3,6 @@ const categoryService = require("../services/category-service");
 
 exports.getCategories = async (req, res, next) => {
   try {
-    const {} = req.body;
     const user = req.user;
 
     const categories = await categoryService.getCategories({ user });
@@ -32,7 +31,7 @@ exports.removeCategory = async (req, res, next) => {
     if (!id) throw ApiError.BadRequest("Category id is required!");
     const user = req.user;
 
-    const category = await categoryService.removeCategory({ id, user });
+    const category = await categoryService.deleteCategory({ id, user });
     return res.json(category);
   } catch (e) {
     next(e);
